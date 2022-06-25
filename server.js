@@ -1,13 +1,16 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
+const cors = require('cors')
 
 var port = process.env.PORT || 3000;
+//app.use(cors());
 
 // #region ################ CONFIG #################
 const app = express();
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+app.use(cors());
 
 var db_config = {
 host: 'mysql746.umbler.com',
