@@ -112,13 +112,14 @@ app.post('/register', function(req, res) {
    var status_code = 200;
    var msg_text = '';
 
-   if (erro == false){
+    if (erro == false){
     register_select(register_temp).then((results) =>  {
-if(result.length > 0){
 
-console.log('Passando no: Register > register_select.Then() > verifica resultado > 0');
-status_code = 400;
-msg_text = 'Já existe um cadastro para esse CPF!';
+      if(result.length > 0){
+
+ console.log('Passando no: Register > register_select.Then() > verifica resultado > 0');
+ status_code = 400;
+ msg_text = 'Já existe um cadastro para esse CPF!';
 
 msg_res.status = status_code;
 msg_res.message = msg_text;
@@ -135,8 +136,12 @@ res.status(msg_res.status).json(msg_res);
 
 //
 res.status(msg_res.status).json(msg_res);
-
-    }).catch((err2) => {
+    
+  
+    }); 
+    
+    /*
+    .catch((err2) => {
   
       console.log('Passando no: Register > register_insert.Catch() ');
 
@@ -148,7 +153,7 @@ console.log('Register INSERT - catch - Erro: ' + msg_res.message);
 //
 res.status(msg_res.status).json(msg_res);
     });
-
+*/
     }
 
     }).catch((err) => {
