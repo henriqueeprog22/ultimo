@@ -181,9 +181,7 @@ console.log('Register Select - catch - erro' + msg_res.message);
 
    
  
-    });
-        
-       /* .catch((err2) => {
+    }).catch((err2) => {
         console.log('Passando no: Register > register_insert.Catch() ');
 
 
@@ -195,7 +193,7 @@ console.log('Register Select - catch - erro' + msg_res.message);
         res.status(msg_res.status).json(msg_res);
 
         });
- */
+ 
 //
     
 
