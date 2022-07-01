@@ -112,92 +112,50 @@ app.post('/register', function(req, res) {
    var status_code = 200;
    var msg_text = '';
 
-   if (erro == false){
    
-    register_select(register_temp).then((results) =>  {
-
-      if(result.length > 0){
-
-console.log('Passando no: Register > register_select.Then() > verifica resultado > 0');
-status_code = 400;
-msg_text = 'Já existe um cadastro para esse CPF!';
-
-msg_res.status = status_code;
-msg_res.message = msg_text;
-
-//
-res.status(msg_res.status).json(msg_res);
-
-}else{
-    register_insert(register_temp).then((result2) => {
-
-     console.log('Passando no: Register > register_insert.Then()');
+   if(erro == false){
+//consulta banco de dados
+    register_select(register_temp).then((result) => {
+    if(result.length > 0){
+      console.log('Passando no: Register > register_select.Then() > Verifica resultado > 0');
+      status_code = 400;
+      console.log('Já existe um cadastro para esse CPF!');
      msg_res.status = status_code;
-     msg_res.message = msg_text;
+   
+    }else{
+     register_insert(register_temp).then((result2) => {
+    console.log('Passando no: Register > register_insert.Then() ');
 
-//
-res.status(msg_res.status).json(msg_res);
+    msg_res = status_code;
 
-    }).catch((err2) => {
-  console.log('Passando no: Register > register_insert.Catch() ');
+     }).catch((err2) => {
+ console.log('Passando no: Register > register_insert.Catch() ');
 
-  msg_res.status = err2.status_code;
-msg_res.message = err2.msg_text;
+ msg_res.status = err2.status_code;
 
-console.log('Register INSERT - catch - Erro: ' + msg_res.message);
 
-//
-res.status(msg_res.status).json(msg_res);
-    });
-}
+     });
+    }
 
     }).catch((err) => {
-    
-    
-  console.log('Passando no: Register > register_select.Catch() ');
- if(err.status_code){
-  msg_res.status = err.status_code;
-  msg_res.message = err.msg_text;
- }else{
-  msg_res.status = 500;
-  msg_res.message = '--->>> Register - register_select - Catch = Erro no Then disparou a Catch...';
- }
-
-console.log('Register Select - catch - erro' + msg_res.message);
-
-
-   res.status(msg_res.status).json(msg_res);
+     console.log('Passando no: Register > register_select.Catch() ');
+     
+     console.log('Register Select - catch - Erro: ' + msg_res.message);
 
     });
-   
-  
-  
-    }else{
-    msg_res.status = status_code;
-    msg_res.message = msg_text;
+
     
-    res.status(msg_res.status).json(msg_res);
+
+   }else{
+   
+
    }
 
-   
- 
-    }).catch((err2) => {
-        console.log('Passando no: Register > register_insert.Catch() ');
-
-
-        msg_res.status = err2.status_code;
-        msg_res.message = err2.msg_text;
-
-        console.log('Register INSERT - catch - Erro: ' + msg_res.message);
-
-        res.status(msg_res.status).json(msg_res);
-
-        });
- 
-//
     
 
+  
 
+});
 
   //  console.log(register_temp);
 
