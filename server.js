@@ -76,16 +76,16 @@ var msg_res = {};
 msg_res.status = 200;
 msg_res.message = "";
 
-var login_temp = {};
-login_temp.nome = req.params.nome;
-login_temp.data_nascimento = req.params.data_nascimento;
-login_temp.cpf = req.params.cpf;
-login_temp.med_ou_est = req.params.med_ou_est;
-login_temp.especialidade = req.params.especialidade;
-login_temp.crmv_facul = req.params.crmv_facul;
-login_temp.optin = req.params.optin;
+var register_temp= {};
+register_temp.nome = req.params.nome;
+register_temp.data_nascimento = req.params.data_nascimento;
+register_temp.cpf = req.params.cpf;
+register_temp.med_ou_est = req.params.med_ou_est;
+register_temp.especialidade = req.params.especialidade;
+register_temp.crmv_facul = req.params.crmv_facul;
+register_temp.optin = req.params.optin;
 
-console.log(login_temp);
+console.log(register_temp);
 
 res.status(msg_res.status).json(msg_res);
 
@@ -112,14 +112,15 @@ app.post('/register', function(req, res) {
    var status_code = 200;
    var msg_text = '';
 
-    if (erro == false){
+   if (erro == false){
+   
     register_select(register_temp).then((results) =>  {
 
       if(result.length > 0){
 
- console.log('Passando no: Register > register_select.Then() > verifica resultado > 0');
- status_code = 400;
- msg_text = 'Já existe um cadastro para esse CPF!';
+console.log('Passando no: Register > register_select.Then() > verifica resultado > 0');
+status_code = 400;
+msg_text = 'Já existe um cadastro para esse CPF!';
 
 msg_res.status = status_code;
 msg_res.message = msg_text;
@@ -136,14 +137,9 @@ res.status(msg_res.status).json(msg_res);
 
 //
 res.status(msg_res.status).json(msg_res);
-    
-  
-    }); 
-    
-    /*
-    .catch((err2) => {
-  
-      console.log('Passando no: Register > register_insert.Catch() ');
+
+    }).catch((err2) => {
+  console.log('Passando no: Register > register_insert.Catch() ');
 
   msg_res.status = err2.status_code;
 msg_res.message = err2.msg_text;
@@ -153,12 +149,11 @@ console.log('Register INSERT - catch - Erro: ' + msg_res.message);
 //
 res.status(msg_res.status).json(msg_res);
     });
-*/
-    }
+}
 
     }).catch((err) => {
     
-    /*
+    
   console.log('Passando no: Register > register_select.Catch() ');
  if(err.status_code){
   msg_res.status = err.status_code;
@@ -172,16 +167,16 @@ console.log('Register Select - catch - erro' + msg_res.message);
 
 
    res.status(msg_res.status).json(msg_res);
-*/
+
     });
    
   
   
     }else{
- //   msg_res.status = status_code;
-  //  msg_res.message = msg_text;
+    msg_res.status = status_code;
+    msg_res.message = msg_text;
     
-   // res.status(msg_res.status).json(msg_res);
+    res.status(msg_res.status).json(msg_res);
    }
 
    
@@ -206,7 +201,7 @@ console.log('Register Select - catch - erro' + msg_res.message);
 
 
 
-  //  console.log(login_temp);
+  //  console.log(register_temp);
 
   //  res.status(msg_res.status).json(msg_res);
     
@@ -241,7 +236,7 @@ function register_insert(register_temp) {
 
 function register_select(register_temp) {
     return new Promise((resolve, reject) =>  { 
-       connection.query(`SELECT * FROM login WHERE nome = '${register_temp.cpf}' `, function(err, results, field){
+       connection.query(`SELECT * FROM login WHERE cpf = '${register_temp.cpf}' `, function(err, results, field){
      
         var obj_err = {};
         obj_err.msg_text = '--->>> register_select - Não entrou no erro ainda...';
