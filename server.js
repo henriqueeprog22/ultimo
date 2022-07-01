@@ -120,7 +120,9 @@ app.post('/register', function(req, res) {
       console.log('Passando no: Register > register_select.Then() > Verifica resultado > 0');
       status_code = 400;
       console.log('Já existe um cadastro para esse CPF!');
-     msg_res.status = status_code;
+    msg_text = 'Já existe um cadastro com esse CPF!';
+      msg_res.status = status_code;
+     msg_res.message = msg_text;
    
     }else{
      register_insert(register_temp).then((result2) => {
