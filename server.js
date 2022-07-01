@@ -123,6 +123,8 @@ app.post('/register', function(req, res) {
     msg_text = 'Já existe um cadastro com esse CPF!';
       msg_res.status = status_code;
      msg_res.message = msg_text;
+
+     res.status(msg_res.status).json(msg_res);
    
     }else{
      register_insert(register_temp).then((result2) => {
