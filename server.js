@@ -137,7 +137,8 @@ res.status(msg_res.status).json(msg_res);
 res.status(msg_res.status).json(msg_res);
 
     }).catch((err2) => {
-  console.log('Passando no: Register > register_insert.Catch() ');
+  
+      console.log('Passando no: Register > register_insert.Catch() ');
 
   msg_res.status = err2.status_code;
 msg_res.message = err2.msg_text;
@@ -147,11 +148,12 @@ console.log('Register INSERT - catch - Erro: ' + msg_res.message);
 //
 res.status(msg_res.status).json(msg_res);
     });
-}
+
+    }
 
     }).catch((err) => {
     
-    
+    /*
   console.log('Passando no: Register > register_select.Catch() ');
  if(err.status_code){
   msg_res.status = err.status_code;
@@ -165,16 +167,16 @@ console.log('Register Select - catch - erro' + msg_res.message);
 
 
    res.status(msg_res.status).json(msg_res);
-
+*/
     });
    
   
   
     }else{
-    msg_res.status = status_code;
-    msg_res.message = msg_text;
+ //   msg_res.status = status_code;
+  //  msg_res.message = msg_text;
     
-    res.status(msg_res.status).json(msg_res);
+   // res.status(msg_res.status).json(msg_res);
    }
 
    
