@@ -175,7 +175,7 @@ function register_insert(register_temp) {
 
 function register_select(register_temp) {
     return new Promise((resolve, reject) =>  { 
-       connection.query(`SELECT * FROM login WHERE nome = '${register_temp.nome}' `, function(err, results, field){
+       connection.query(`SELECT * FROM login WHERE nome = '${register_temp.cpf}' `, function(err, results, field){
      
         var obj_err = {};
         obj_err.msg_text = '--->>> register_select - Não entrou no erro ainda...';
